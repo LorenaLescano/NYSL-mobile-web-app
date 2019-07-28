@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title> NYSL | Home </title>
+     <!--viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--to make the status bar translucent/ full-screen browsing-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!--Adds an iPhone And iPad Icon-->
+    <link rel="apple-touch-icon" href=".images/nysl_logo.png"/>    
+    <!--Adds an Android Icon-->
+    <link rel="android-touch-icon" href=".images/nysl_logo.png"/>
+    
+    <!--Adds Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    
+    <!--w3.css stylesheet, color and fonts libraries-->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-2018.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!--Link my css-->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+	
+<body>
+    <div class = "container h-100 " id="app">
+        
+            <!--Navigation bar with dropdown menu-->
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid w3-black">
+                <div class="navbar-header w3-black">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>                        
+                    </button>
+                    <!--<a class="navbar-brand w3-black" href="#">NYSL</a>-->
+                </div>
+                
+                <div class="collapse navbar-collapse w3-bar w3-black w3-card" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a v-on:click="menu='home'">HOME</a></li>
+                        <li class="dropdown">
+                        <li><a v-on:click="menu='about'">ABOUT</a></li>
+                        <li><a v-on:click="menu='schedule'">SCHEDULE & LOCATIONS</a></li>
+                        <li><a v-on:click="menu='contact'">CONTACT</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav> 
+        
+            <!--Header--> 
+            <header class="bgimg w3-display-container w3-grayscale-min" id="banner">
+                    <div class="bgimg w3-display-container">
+                        <img src="images/banner.jfif" alt="banner" width="100%" height="150">
+                    </div>
+                    <div class="w3-display-middle w3-center">
+                        <span class="w3-text-white" style="font-size:30px"><strong>NYSL</strong></span>
+                    </div>
+            </header>      
+        <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+        <!-- //HOME// -->
+        <div v-show="menu === 'home'" id="home" class="w3-container menu w3-padding-48 w3-card" style="margin-top:20px">
+            <h3 class="text-center"><strong>UPCOMING EVENTS</strong></h3>
+            <div>
+                <h4 class="text-center">August 4</h4>
+                <p class="text-center">Northside Youth Soccer League's Fundraiser.</p>
+
+                <h4 class="text-center">August 16</h4>
+                <p class="text-center">Season Kick-off: Meet the Teams.</p>
+        
+                <h4 class="text-center">September 1</h4>    
+                <p class="text-center"> First Game of the Season (Check Game Schedule for details).</p>
+            </div>
+        
+        <!-- More information botton -->
+            <button v-on:click="menu = 'schedule'" class="w3-button w3-black w3-margin-bottom"> Schedule and Locations ></button>
+        </div>
+        <!-- /////////////////}///////////////////////////////////////////////////////////////////////////////////////////END HOME -->
+        
+        <!-- //ABOUT US// -->
+        <div v-show="menu === 'about'" id="about">
+                <!-- Back Button -->
+            <button v-on:click="menu = 'home'" class="w3-button w3-black w3-margin-bottom">&lt;Back</button>
+                
+            <div class="w3-container menu w3-padding-48 w3-card w3-content" style="max-width:700px" id="about">
+                    
+            <h3 class="text-center"><strong>ABOUT US</strong></h3>    
+            <h4><strong>Mission</strong></h4>
+            <p class="text-justify">To support young athletes living in Chicago's Northside neighborhoods, who have an interest in learning and playing soccer, specifically those skills around team cooperation and good sportsmanship.</p>
+            
+            <h4><strong>Vision</strong></h4>
+            <p class="text-justify">The Northside Youth Soccer League aspires to develop strong, well-rounded, and mindful athletes through the building of character, self-discipline, and leadership.</p>
+            
+            <h4><strong>General information</strong></h4>
+            <p class="text-justify">The Northside Youth Soccer League was established in 1996 to provide athletes residing in Chicago's northside neighborhoods an environment in wich to learn and play soccer. To be a member of NYSL, you must be between the ages of 4 - 12 and reside in a Chicago northside neighborhood. NYSL is ran by a small full-time staff, and relies on the generous volunteer time of parents and previous league members.</p>
+            </div>
+        </div>
+        <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////END ABOUT US -->
+        
+        <!-- //GAMES SCHEDULED VIEWPORT// -->                  
+            <div v-show="menu === 'schedule'" id="schedule">
+                <!-- Back Button -->
+                <button v-on:click="menu = 'home'" class="w3-button w3-black w3-margin-bottom">&lt;Back</button>
+                
+                <div class="w3-container menu w3-padding-48 w3-card w3-content" style="max-width:700px" id="schedule">
+                <h3 class="text-center"><strong> GAMES SCHEDULE </strong></h3>
+                    <ul>
+                        <li v-for="game in games">
+                            <strong>{{game.team1}} vs. {{game.team2}}</strong> <br>
+                            {{game.date}} | {{game.time}}
+                            <button :id="game.id" v-on:click="gameDetails(game.id)" class="w3-btn w3-block w3-dark-gray">More info</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+ 
+        <!-- //Game Details VIEWPORT 1 COLUMNA// -->                
+            <div v-show="menu === 'game-detail'" id="game-details">
+                <!-- Back Button -->
+                <button v-on:click="menu = 'schedule'" class="w3-button w3-black w3-margin-bottom">&lt;Schedule</button>
+                
+                <div class="w3-container menu w3-padding-48 w3-card w3-content" style="max-width:700px" id="game-details">
+                <h3 class="text-center"><strong> GAMES DETAILS</strong></h3>
+                <div v-if="matchId != ''">
+                    <div v-for="game in games" v-if="game.id == matchId">
+                        <h1 class="text-center">{{game.team1}} vs. {{game.team2}}</h1>
+                        <h4 class="text-center">{{game.date}} | {{game.time}}</h4><br>
+                        <h4 class="text-center"><strong>{{game.location}}</strong></h4><br>
+                        {{locations.address}}    
+                        <div v-for="loc in locations">
+                                <loc :location="loc.embedMap" v-if="loc.name == game.location"></loc>
+                        </div>
+                    </div>
+                </div>      
+            </div>
+                <p><br><strong>Facility Type:</strong> Outdoor</p>
+                <p><strong>Additional Information:</strong> If deemed necessary by NYSL, games may be shortened or cancelled due to extreme weather conditions.</p>     
+            </div> <!-- End Viewport -->
+        <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////END SCHEDULE -->
+        
+        <!-- DUPLICATE SECTION - GAMES SCHEDULE/ LANDSCAPE -->
+           <div v-show="menu === 'schedule'" id="schedule2">
+                <!-- Back Button -->
+                <button v-on:click="menu = 'home'" class="w3-button w3-black w3-margin-bottom">&lt;Back</button>
+                <div class="w3-row">
+               <div class="w3-col s6 w3-container menu w3-padding-48 w3-card w3-content" style="max-width:700px" id="schedule2">
+                <h3 class="text-center"><strong> GAMES SCHEDULE</strong></h3>
+                    <ul>
+                        <li v-for="game in games">
+                            <strong>{{game.team1}} vs. {{game.team2}}</strong> <br>
+                            {{game.date}} | {{game.time}}
+                            <button :id="game.id" v-on:click="matchId = game.id" class="w3-btn w3-block w3-dark-gray">More info</button>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                
+                <div class="w3-col s6 w3-container menu w3-padding-48 w3-card w3-content" style="max-width:700px" id="game-details">
+                <h3 class="text-center"><strong> GAMES DETAILS</strong></h3>
+                <div v-if="matchId != ''">
+                    <div v-for="game in games" v-if="game.id == matchId">
+                        <h1 class="text-center">{{game.team1}} vs. {{game.team2}}</h1>
+                        <h4 class="text-center">{{game.date}} | {{game.time}}</h4><br>
+                        <h4 class="text-center"><strong>{{game.location}}</strong></h4><br>
+                        {{locations.address}}    
+                        <div v-for="loc in locations">
+                                <loc :location="loc.embedMap" v-if="loc.name == game.location"></loc>
+                        </div>
+                    </div>
+                </div>      
+            </div>    
+            </div>
+               </div>
+                
+            </div>
+ 
+    
+        
+        <!--////////////////////////////////////////////////////////////////////////////////////////////////////////////END SCHEDULE2 -->
+        
+        <!-- //CONTACT// -->
+        <div v-show="menu === 'contact'" id="contact">
+                <!-- Back Button -->
+            <button v-on:click="menu = 'home'" class="w3-button w3-black w3-margin-bottom">&lt;Back</button>
+                
+            <div class="w3-container menu w3-padding-48 w3-card w3-content" style="max-width:700px" id="contact">
+            
+            <h3 class="text-center"><strong>CONTACT US:</strong></h3>
+            <p><strong>Please email us at:</strong></p>
+            <p class="far fa-envelope"> <a href="mailto:nysl@chisoccer.org">nysl@chisoccer.org</a>
+            </p>
+            
+            <p><strong>Please direct all questions to:</strong> Michael Randall, League Coordinator</p>
+            <p class="fa fa-phone"></p> Phone: (630) 690-8132<br>
+            <p class="far fa-envelope"> <a href="mailto:michael.randall@chisoccer.org">michael.randall@chisoccer.org</a>
+            </p>
+          </div>
+        </div>
+        <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////END CONTACT -->
+        
+        <!-- Footer -->
+        <footer class="col-md-12 w3-container w3-padding-16 w3-center w3-opacity w3-light-grey">
+            <i class="fa fa-facebook-official w3-hover-opacity"></i>
+            <i class="fa fa-instagram w3-hover-opacity"></i>
+            <i class="fa fa-snapchat w3-hover-opacity"></i>          
+            <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+            <i class="fa fa-twitter w3-hover-opacity"></i>
+            <i class="fa fa-linkedin w3-hover-opacity"></i>
+            <p class="w3-medium"> ©2019 NYSL | All the rights reserved </p>
+        </footer>
+          
+    </div> <!-- End Page Content -->                   
+        
+        <!-- scripts -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> <!-- jQuery -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>  <!-- Bootstrap 4 Latest compiled JS -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!-- Vue.js -->
+        <script src="scripts/nysldata.js"></script>
+        <script src="./scripts/main.js"></script>
+</body>
+</html>
